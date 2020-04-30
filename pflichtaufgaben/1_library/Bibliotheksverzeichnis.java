@@ -1,5 +1,3 @@
-import java.util.LinkedList;
-
 public class Bibliotheksverzeichnis {
   private Buch[] books;
 
@@ -25,45 +23,44 @@ public class Bibliotheksverzeichnis {
   }
 
   // Utility for search funcs
-  private Buch[] bookLLToArr( LinkedList<Buch> list ) {
-    Buch[] books = new Buch[list.size()];
+  private Buch[] extendArrayByOne( Buch[] bookArr, Buch bookToAdd ) {
+    Buch[] newBookArr = new Buch[bookArr.length +1];
 
-    for ( int i = 0; i < list.size(); i++ ) {
-      books[i] = list.get(i);
+    for ( int i = 0; i < bookArr.length; i++ ) {
+      newBookArr[i] = bookArr[i];
     }
+    newBookArr[newBookArr.length -1] = bookToAdd;
 
-    return books;
+    return newBookArr;
   }
 
   public Buch[] searchByLastname( String name ) {
-    // Temp LinkedList as I won't know how many matches I'll get in advance
-    LinkedList<Buch> list = new LinkedList<Buch>();
+    Buch[] books = new Buch[0];
 
     for ( Buch b : this.books ) {
       for ( String[] a : b.getAuthor() ) {
         if ( a[1] == name ) {
-          list.add( b );
+          books = extendArrayByOne( books, b );
         }
       }
     }
 
-    Buch[] books = bookLLToArr( list );
     return books;
   }
   public Buch[] searchByQuery( String query ) {
-    LinkedList<Buch> list = new LinkedList<Buch>();
+    Buch[] books = new Buch[0];
 
     for ( Buch b : this.books ) {
       String title = b.getTitle();
 
       // Case insenstive match: (?i)
-      String regex = "(?i)(.*)" + query + "(.*)";
+      // Fixed string match (https://stackoverflow.com/a/60161): \Qstring\E
+      String regex = "(?i)(.*)\\Q" + query + "\\E(.*)";
       if ( title.matches( regex ) ) {
-        list.add( b );
+        books = extendArrayByOne( books, b );
       }
     }
 
-    Buch[] books = bookLLToArr( list );
     return books;
   }
 }

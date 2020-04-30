@@ -47,6 +47,22 @@ public class BibliothekTest {
     assertEquals( result, expected );
   }
 
+  @Test
+  public void searchByLastnameDoesNotTakeRegex() {
+    Buch[] expected = {};
+    Buch[] result = bibo.searchByLastname( ".*" );
+
+    assertEquals( result, expected );
+  }
+
+  @Test
+  public void searchByLastnameDoesNotMatchCaseInsentive() {
+    Buch[] expected = {};
+    Buch[] result = bibo.searchByLastname( "sult" );
+
+    assertEquals( result, expected );
+  }
+
   // searchByQuery
   @Test
   public void searchByQuerySingleMatch() {
@@ -76,6 +92,14 @@ public class BibliothekTest {
   public void searchByQueryNoMatches() {
     Buch[] expected = {};
     Buch[] result = bibo.searchByQuery( "JavaScript" );
+
+    assertEquals( expected, result );
+  }
+
+  @Test
+  public void searchByQueryDoesNotTakeRegex() {
+    Buch[] expected = {};
+    Buch[] result = bibo.searchByQuery( ".*" );
 
     assertEquals( expected, result );
   }

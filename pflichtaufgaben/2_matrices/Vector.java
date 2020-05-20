@@ -2,7 +2,7 @@ public class Vector extends Matrix {
   private float[] vector;
 
   public Vector( float[][] data ) throws IllegalArgumentException {
-    super( data ); // Validate as matrix
+    super( data );
 
     // Validate as vector
     if ( data.length > 1 ) { // is colum vector

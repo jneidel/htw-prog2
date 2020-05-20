@@ -22,4 +22,4 @@ test:
 	$(JUNIT) $(MAINTEST)
 
 clean:
-	rm *.class
+	rm *.class *.

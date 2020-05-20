@@ -2,7 +2,6 @@ public class Matrix {
   private float[][] matrix;
   private int rows;
   private int columns;
-  private int rank;
 
   public Matrix( float[][] data ) throws IllegalArgumentException {
     int verticalLength = data.length;
@@ -10,25 +9,13 @@ public class Matrix {
 
     for ( float[] line : data ) {
       if ( line.length != horizontalLength ) {
-        throw new IllegalArgumentException( "Horizontal arrays don't have the same length" );
+        throw new IllegalArgumentException( "Horizontal arrays are not all of equal length" );
       }
-
-      // for ( float point : line ) {
-      //   if ( point == null ) {
-      //     throw new IllegalArgumentException( "Data points shall not be null" );
-      //   }
-      // }
     }
 
     this.matrix = data;
     this.rows = horizontalLength;
     this.columns = verticalLength;
-
-    if ( verticalLength <= horizontalLength ) {
-      this.rank = verticalLength;
-    } else {
-      this.rank = horizontalLength;
-    }
   }
 
   public String toString() {

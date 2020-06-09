@@ -1,0 +1,3 @@
+#! /bin/sh
+
+ls *.java | fgrep -v "Tests.java" | entr javac $(ls *.java | fgrep -v "Tests.java")

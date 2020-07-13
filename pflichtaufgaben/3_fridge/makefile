@@ -22,7 +22,7 @@ test:
 	$(JUNIT) $(MAINTEST)
 
 clean:
-	rm *.class *.
+	rm *.class
 
 docs:
 	cd docs
